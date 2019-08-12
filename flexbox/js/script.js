@@ -1,8 +1,6 @@
 const FILE = './js/data.json';
 const list = document.querySelector('.list');
 const controlls = document.querySelector('.flex-controlls');
-const howManyItems = document.querySelector('.items-input [type="number"]');
-const applyItems = document.querySelector('.items-input [type="button"]');
 
 const renderListItems = num => {
   const fragment = document.createDocumentFragment();
@@ -82,11 +80,18 @@ const loadJSON = callback => {
     .catch(err => console.log(err));
 };
 
-// initialize the application
-renderListItems.call(null, howManyItems.value);
+const init = () => {
+  const howManyItems = document.querySelector('.items-input [type="number"]');
+  const applyItems = document.querySelector('.items-input [type="button"]');
 
-applyItems.addEventListener('click', function() {
   renderListItems.call(null, howManyItems.value);
-});
 
-loadJSON(groupFactory);
+  applyItems.addEventListener('click', function() {
+    renderListItems.call(null, howManyItems.value);
+  });
+
+  loadJSON(groupFactory);
+};
+
+// initialize the application
+init();
