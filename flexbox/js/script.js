@@ -21,6 +21,13 @@ const renderListItems = num => {
   [...fragment.children].forEach(item => list.appendChild(item));
 };
 
+const renderOption = object => {
+  // object.name - STR
+  // object.options - ARR of STR
+  console.log(object.name);
+
+}
+
 const groupFactory = group => {
   let title = '';
   const parent = document.createElement('div');
@@ -43,7 +50,7 @@ const groupFactory = group => {
   }
 
   // const fieldSet = document.createElement('fieldset');
-  // group.properties.forEach();
+  group.properties.forEach(option => renderOption(option));
 };
 
 const loadJSON = callback => {
