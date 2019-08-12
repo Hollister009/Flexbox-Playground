@@ -6,7 +6,7 @@ const applyItems = document.querySelector('.items-input [type="button"]');
 
 const renderListItems = num => {
   const fragment = document.createDocumentFragment();
-  const max = 24;
+  const max = 20;
   let i = 0;
 
   do {
@@ -18,7 +18,7 @@ const renderListItems = num => {
   } while (i < num && num <= max);
 
   list.innerHTML = '';
-  [...fragment.children].forEach(item => list.appendChild(item));
+  list.appendChild(fragment);
 };
 
 const renderOption = object => {
@@ -37,7 +37,9 @@ const renderOption = object => {
     `;
     fragment.appendChild(radio);
   });
-  console.log(fragment.children);
+  const fieldSet = document.createElement('fieldset');
+  fieldSet.appendChild(fragment);
+  return fieldSet;
 };
 
 const groupFactory = group => {
@@ -58,19 +60,23 @@ const groupFactory = group => {
   }
 
   if (title.length > 0) {
-    parent.innerHTML = '<h3>${title}</h3>';
+    parent.innerHTML = `<h3>${title}</h3>`;
   }
 
-  // const fieldSet = document.createElement('fieldset');
-  group.properties.forEach(option => renderOption(option));
+  group.properties.forEach(option => {
+    parent.appendChild(renderOption(option));
+  });
+  return parent;
 };
 
 const loadJSON = callback => {
+  controlls.innerHTML = '';
+
   fetch(FILE)
     .then(res => res.json())
     .then(data =>
       data.forEach(group => {
-        callback(group);
+        controlls.appendChild(callback(group));
       }),
     )
     .catch(err => console.log(err));
