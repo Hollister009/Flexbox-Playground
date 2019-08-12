@@ -1,0 +1,32 @@
+[
+  { "group": "display", "properties": [
+      { "name": "display", "options": ["flex", "inline-flex"] }
+    ]
+  },
+  { "group": "ordering&orientation", "properties": [
+      { "name": "flex-direction", "options": ["row", "row-reverse", "column", "column-reverse"] },
+      { "name": "flex-wrap", "options": ["nowrap", "wrap", "wrap-reverse"] },
+      { "name": "flex-flow", "options": ["row nowrap", "column-reverse", "column wrap", "row-reverse wrap-reverse"] },
+      { "name": "order", "options": ["-1", "0", "1"] }
+    ]
+  },
+  { "group": "alignment", "properties": [
+      {
+        "name": "justify-content",
+        "options": ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"]
+      },
+      { "name": "align-items", "options": ["flex-start", "flex-end", "center", "baseline", "stretch"] },
+      { "name": "align-self", "options": ["flex-start", "flex-end", "center", "baseline", "stretch"] },
+      {
+        "name": "align-content",
+        "options": ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "stretch"]
+      }
+    ]
+  },
+  { "group": "flexibility", "properties": [
+      { "name": "flex-grow", "options": ["0", "1"] },
+      { "name": "flex-shrink", "options": ["0", "1"] },
+      { "name": "flex-basis", "options": ["30%", "50%", "content"] }
+    ]
+  }
+]
