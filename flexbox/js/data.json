@@ -1,16 +1,16 @@
 [
-  { "group": "display", "properties": [
+  { "title": "display", "properties": [
       { "name": "display", "options": ["flex", "inline-flex"] }
     ]
   },
-  { "group": "ordering&orientation", "properties": [
+  { "title": "ordering", "properties": [
       { "name": "flex-direction", "options": ["row", "row-reverse", "column", "column-reverse"] },
       { "name": "flex-wrap", "options": ["nowrap", "wrap", "wrap-reverse"] },
       { "name": "flex-flow", "options": ["row nowrap", "column-reverse", "column wrap", "row-reverse wrap-reverse"] },
       { "name": "order", "options": ["-1", "0", "1"] }
     ]
   },
-  { "group": "alignment", "properties": [
+  { "title": "alignment", "properties": [
       {
         "name": "justify-content",
         "options": ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"]
@@ -23,7 +23,7 @@
       }
     ]
   },
-  { "group": "flexibility", "properties": [
+  { "title": "flexibility", "properties": [
       { "name": "flex-grow", "options": ["0", "1"] },
       { "name": "flex-shrink", "options": ["0", "1"] },
       { "name": "flex-basis", "options": ["30%", "50%", "content"] }

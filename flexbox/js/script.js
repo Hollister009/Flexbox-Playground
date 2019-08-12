@@ -1,10 +1,10 @@
-const DATA = './data.json';
+const FILE = './js/data.json';
 const list = document.querySelector('.list');
 const controlls = document.querySelector('.flex-controlls');
 const howManyItems = document.querySelector('.items-input [type="number"]');
 const applyItems = document.querySelector('.items-input [type="button"]');
 
-const createListItems = num => {
+const renderListItems = num => {
   const fragment = document.createDocumentFragment();
   const max = 24;
   let i = 0;
@@ -15,19 +15,54 @@ const createListItems = num => {
     item.classList.add('list-item');
     item.innerHTML = `<h2>${i}</h2>`;
     fragment.appendChild(item);
-  } while (i < num && num < max);
+  } while (i < num && num <= max);
 
   list.innerHTML = '';
   [...fragment.children].forEach(item => list.appendChild(item));
 };
 
-createListItems.call(null, howManyItems.value);
+const groupFactory = group => {
+  let title = '';
+  const parent = document.createElement('div');
+  parent.classList.add('flex-group');
+
+  switch (group.title) {
+    case 'ordering':
+      title = 'Ordering & Orientation';
+      break;
+    case 'alignment':
+      title = 'Alignment';
+      break;
+    case 'flexibility':
+      title = 'Flexibility';
+      break;
+  }
+
+  if (title.length > 0) {
+    parent.innerHTML = '<h3>${title}</h3>';
+  }
+
+  // const fieldSet = document.createElement('fieldset');
+  // group.properties.forEach();
+};
+
+const loadJSON = callback => {
+  fetch(FILE)
+    .then(res => res.json())
+    .then(data =>
+      data.forEach(group => {
+        callback(group);
+      }),
+    )
+    .catch(err => console.log(err));
+};
+
+
+// initialize the application
+renderListItems.call(null, howManyItems.value);
 
 applyItems.addEventListener('click', function() {
-  createListItems.call(null, howManyItems.value);
+  renderListItems.call(null, howManyItems.value);
 });
 
-const createGroup = () => {};
-const loadJSON = callback => {};
-console.log(JSON.stringify(options));
-// options.forEach(option => createGroup);
+loadJSON(groupFactory);
