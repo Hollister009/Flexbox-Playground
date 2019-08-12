@@ -22,11 +22,23 @@ const renderListItems = num => {
 };
 
 const renderOption = object => {
+  const fragment = document.createDocumentFragment();
   // object.name - STR
+  const legend = document.createElement('legend');
+  legend.innerText = object.name;
+  fragment.appendChild(legend);
   // object.options - ARR of STR
-  console.log(object.name);
-
-}
+  object.options.forEach(opt => {
+    const radio = document.createElement('div');
+    radio.classList.add('radio-controll');
+    radio.innerHTML = `
+      <input type="radio" name="${object.name}" id="${opt}">
+      <label for="${opt}">${opt}</label>
+    `;
+    fragment.appendChild(radio);
+  });
+  console.log(fragment.children);
+};
 
 const groupFactory = group => {
   let title = '';
@@ -63,7 +75,6 @@ const loadJSON = callback => {
     )
     .catch(err => console.log(err));
 };
-
 
 // initialize the application
 renderListItems.call(null, howManyItems.value);
