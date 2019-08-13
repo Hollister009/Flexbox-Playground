@@ -28,12 +28,10 @@ fieldset {
 }
 
 .list {
-  /* flex-wrap: wrap;
-  flex-basis: auto;
-  flex-direction: row; */
+  display: block;
   min-height: 500px;
-  /* align-items: center; */
-  /* justify-content: space-between; */
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 .list-item {
@@ -66,6 +64,32 @@ fieldset {
 
 .flex-group {}
 
-.flex-container {
+/* flex properties */
+
+/* display */
+
+.d-flex{
   display: flex;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+}
+
+/* flex-direction */
+
+.fd-row {
+  flex-direction: row;
+}
+
+.fd-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.fd-column {
+  flex-direction: column;
+}
+
+.fd-column-reverse {
+  flex-direction: column-reverse;
 }

@@ -1,6 +1,6 @@
 [
   { "title": "display", "properties": [
-      { "name": "display", "options": ["flex", "inline-flex"] }
+      { "name": "display", "options": ["block", "flex", "inline-flex"] }
     ]
   },
   { "title": "ordering", "properties": [

@@ -1,6 +1,7 @@
 const FILE = './js/data.json';
 const list = document.querySelector('.list');
-const controlls = document.querySelector('.flex-controlls');
+const flexControlls = document.querySelector('.flex-controlls');
+let jsonData;
 
 const renderListItems = num => {
   const fragment = document.createDocumentFragment();
@@ -19,7 +20,12 @@ const renderListItems = num => {
   list.appendChild(fragment);
 };
 
-const renderOption = object => {
+/**
+ *
+ * @param {object} object - optiion object wich must be rendered
+ * @param {string} group - group of option object
+ */
+const renderOption = (object, group) => {
   const fragment = document.createDocumentFragment();
   const fieldSet = document.createElement('fieldset');
   const legend = document.createElement('legend');
@@ -28,11 +34,12 @@ const renderOption = object => {
   fragment.appendChild(legend);
 
   object.options.forEach(opt => {
+    const pre = prefixOption(object.name);
     const radio = document.createElement('div');
     radio.classList.add('radio-controll');
     radio.innerHTML = `
-      <input type="radio" name="${object.name}" id="${opt}">
-      <label for="${opt}">${opt}</label>
+      <input type="radio" name="${object.name}" id="${pre}_${opt}" data-value="${opt}" data-group="${group}">
+      <label for="${pre}_${opt}">${opt}</label>
     `;
     fragment.appendChild(radio);
   });
@@ -64,22 +71,26 @@ const groupFactory = group => {
   }
 
   group.properties.forEach(option => {
-    parent.appendChild(renderOption(option));
+    parent.appendChild(renderOption(option, group.title));
   });
   return parent;
 };
 
 const loadJSON = callback => {
-  controlls.innerHTML = '';
-
   fetch(FILE)
     .then(res => res.json())
-    .then(data =>
-      data.forEach(group => {
-        controlls.appendChild(callback(group));
-      }),
-    )
+    .then(data => {
+      jsonData = data;
+      callback(data);
+    })
     .catch(err => console.log(err));
+};
+
+const renderFlexControlls = data => {
+  flexControlls.innerHTML = '';
+  data.forEach(group => {
+    flexControlls.appendChild(groupFactory(group));
+  });
 };
 
 const prefixOption = name => {
@@ -125,6 +136,20 @@ const prefixOption = name => {
   return prefix;
 };
 
+const eventGroup = object => {
+  const group = jsonData.find(item => item.title === object.dataset.group);
+  const classList = list.classList;
+  const groupOptionName = ['display', 'flex-direction'];
+  const groupClasses = [
+    { name: 'display', classNames: ['d-flex', 'd-in-flex'] },
+    { name: 'flex-direction', classNames: ['fd-row', 'fd-row-reverse', 'fd-column', 'fd-column-reverse'] },
+  ];
+
+  const option = group.properties.find(prop => prop.name === object.name);
+  console.log(option);
+  console.log(object.dataset.value);
+};
+
 const init = () => {
   const howManyItems = document.querySelector('.items-input [type="number"]');
   const applyItems = document.querySelector('.items-input [type="button"]');
@@ -135,7 +160,11 @@ const init = () => {
     renderListItems.call(null, howManyItems.value);
   });
 
-  loadJSON(groupFactory);
+  flexControlls.addEventListener('change', function(evt) {
+    eventGroup(evt.target);
+  });
+
+  loadJSON(renderFlexControlls);
 };
 
 // initialize the application
