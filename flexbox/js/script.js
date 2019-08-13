@@ -6,6 +6,7 @@ let jsonData;
 const renderListItems = num => {
   const fragment = document.createDocumentFragment();
   const max = 20;
+  const min = 2;
   let i = 0;
 
   do {
@@ -14,7 +15,7 @@ const renderListItems = num => {
     item.classList.add('list-item');
     item.innerHTML = `<h2>${i}</h2>`;
     fragment.appendChild(item);
-  } while (i < num && num <= max);
+  } while ((i < num || i < min) && num <= max);
 
   list.innerHTML = '';
   list.appendChild(fragment);
@@ -152,9 +153,18 @@ const eventGroup = object => {
   option.className && cnList.add(option.className);
 };
 
+const uncheckAllOptions = () => {
+  const cnList = [...list.classList].filter(cn => cn !== 'list');
+  const allOptions = [...document.querySelectorAll('[type="radio"]')];
+
+  allOptions.forEach(radio => (radio.checked = false));
+  list.classList.remove(...cnList);
+};
+
 const init = () => {
   const howManyItems = document.querySelector('.items-input [type="number"]');
   const applyItems = document.querySelector('.items-input [type="button"]');
+  const clearBtn = document.querySelector('.btn-clear-radio');
 
   renderListItems.call(null, howManyItems.value);
 
@@ -165,6 +175,8 @@ const init = () => {
   flexControlls.addEventListener('change', function(evt) {
     eventGroup(evt.target);
   });
+
+  clearBtn.addEventListener('click', uncheckAllOptions);
 
   loadJSON(renderFlexControlls);
 };

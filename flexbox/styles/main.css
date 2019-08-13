@@ -22,10 +22,15 @@ main.content {
   flex-basis: 25%;
   margin: 0 20px;
   border: 1px solid grey;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
-.content header {
+.controlls-header {
   padding: 7px;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
   box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.75);
 }
 
@@ -82,8 +87,6 @@ fieldset {
 }
 
 .flex-controlls {
-  max-height: 500px;
-  overflow-y: scroll;
 }
 
 .radio-controll label {

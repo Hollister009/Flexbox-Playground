@@ -12,9 +12,9 @@
 <body>
   <section class="items-input">
     <label>
-      How many boxes to display:
-      <input type="number" name="items" id="items" value="8" min="1" max="20">
-      <input type="button" name="items-apply" id="items-apply" value="apply">
+      How many boxes to display(min 2, max 20):
+      <input type="number" name="items" id="items" value="8" min="2" max="20">
+      <input class="btn" type="button" name="items-apply" id="items-apply" value="apply">
     </label>
   </section>
   <main class="content">
@@ -22,9 +22,9 @@
       <ul class="list"></ul>
     </section>
     <aside>
-      <header>
-        <span class="controlls-text">Radio Controlls:</span>
-        <button class="btn-clear">Clear</button>
+      <header class="controlls-header">
+        <span class="controlls-header__text">Radio Controlls:</span>
+        <button class="btn btn-clear-radio">clear</button>
       </header>
       <section class="flex-controlls"></section>
     </aside>
