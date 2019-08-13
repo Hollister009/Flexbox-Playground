@@ -138,11 +138,23 @@ const prefixOption = name => {
 };
 
 const eventGroup = object => {
-  const group = jsonData.find(item => item.title === object.dataset.group);
   const cnList = list.classList;
-
+  // 1. find options object from jsonData
+  const group = jsonData.find(item => item.title === object.dataset.group);
+  // 2. find target property from group
   const property = group.properties.find(prop => prop.name === object.name);
+  // 3. array of option classes
+  const groupClassNames = property.options.map(el => el.className);
+  // 4. find target option from property array
   const option = property.options.find(opt => opt.option === object.dataset.value);
+
+  groupClassNames.forEach(r => {
+    cnList.contains(r) && cnList.remove(r);
+  });
+
+  option.className && cnList.add(option.className);
+
+  console.log([...cnList]);
   console.log('-------------');
   console.log(`ClassName: ${option.className}`);
   console.log(`Option: ${object.dataset.value}`);
