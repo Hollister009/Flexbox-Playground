@@ -56,14 +56,11 @@ const groupFactory = group => {
   parent.dataset.group = group.title;
 
   switch (group.title) {
-    case 'ordering':
-      title = 'Ordering & Orientation';
-      break;
-    case 'alignment':
-      title = 'Alignment';
-      break;
     case 'flexibility':
-      title = 'Flexibility';
+      title = 'Item Flexibility';
+      break;
+    default:
+      title = group.title[0].toUpperCase() + group.title.slice(1);
       break;
   }
 
@@ -153,11 +150,6 @@ const eventGroup = object => {
   });
 
   option.className && cnList.add(option.className);
-
-  console.log([...cnList]);
-  console.log('-------------');
-  console.log(`ClassName: ${option.className}`);
-  console.log(`Option: ${object.dataset.value}`);
 };
 
 const init = () => {
