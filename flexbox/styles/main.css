@@ -68,28 +68,28 @@ fieldset {
 
 /* display */
 
-.d-flex{
+.ds_flex{
   display: flex;
 }
 
-.d-inline-flex {
+.ds_inline-flex {
   display: inline-flex;
 }
 
 /* flex-direction */
 
-.fd-row {
+.fd_row {
   flex-direction: row;
 }
 
-.fd-row-reverse {
+.fd_row-reverse {
   flex-direction: row-reverse;
 }
 
-.fd-column {
+.fd_column {
   flex-direction: column;
 }
 
-.fd-column-reverse {
+.fd_column-reverse {
   flex-direction: column-reverse;
 }

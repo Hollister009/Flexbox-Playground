@@ -1,32 +1,85 @@
 [
   { "title": "display", "properties": [
-      { "name": "display", "options": ["block", "flex", "inline-flex"] }
+      { "name": "display", "options": [
+        { "option": "block", "className": "" },
+        { "option": "flex", "className": "ds_flex" },
+        { "option": "inline-flex", "className": "ds_inline-flex" }
+      ]}
     ]
   },
   { "title": "ordering", "properties": [
-      { "name": "flex-direction", "options": ["row", "row-reverse", "column", "column-reverse"] },
-      { "name": "flex-wrap", "options": ["nowrap", "wrap", "wrap-reverse"] },
-      { "name": "flex-flow", "options": ["row nowrap", "column-reverse", "column wrap", "row-reverse wrap-reverse"] },
-      { "name": "order", "options": ["-1", "0", "1"] }
-    ]
-  },
-  { "title": "alignment", "properties": [
-      {
-        "name": "justify-content",
-        "options": ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly"]
-      },
-      { "name": "align-items", "options": ["flex-start", "flex-end", "center", "baseline", "stretch"] },
-      { "name": "align-self", "options": ["flex-start", "flex-end", "center", "baseline", "stretch"] },
-      {
-        "name": "align-content",
-        "options": ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "stretch"]
-      }
+      { "name": "flex-direction", "options": [
+        { "option": "row", "className": "fd_row" },
+        { "option": "row-reverse", "className": "fd_row-reverse" },
+        { "option": "column", "className": "fd_col" },
+        { "option": "column-reverse", "className": "fd_col-reverse" }
+      ]},
+      { "name": "flex-wrap", "options": [
+        { "option": "nowrap", "className": "fw_nowrap" },
+        { "option": "wrap", "className": "fw_wrap" },
+        { "option": "wrap-reverse", "className": "fw_wrap-reverse" }
+      ]},
+      { "name": "flex-flow", "options": [
+        { "option": "row nowrap", "className": "ff_row-nowrap" },
+        { "option": "column-reverse", "className": "ff_col-reverse" },
+        { "option": "column wrap", "className": "ff_col-wrap" },
+        { "option": "row-reverse wrap-reverse", "className": "ff_row-reverse_wrap-reverse" }
+      ]},
+      { "name": "order", "options": [
+        { "option": "-1", "className": "order(-1)" },
+        { "option": "0", "className": "order(0)" },
+        { "option": "1", "className": "order(1)" }
+      ]}
     ]
   },
   { "title": "flexibility", "properties": [
-      { "name": "flex-grow", "options": ["0", "1"] },
-      { "name": "flex-shrink", "options": ["0", "1"] },
-      { "name": "flex-basis", "options": ["30%", "50%", "content"] }
+      { "name": "flex-grow", "options": [
+        { "option": "0", "className": "flex-grow(0)" },
+        { "option": "1", "className": "flex-grow(1)" }
+      ]},
+      { "name": "flex-shrink", "options": [
+        { "option": "0", "className": "flex-shrink(0)" },
+        { "option": "1", "className": "flex-shrink(1)" }
+      ]},
+      { "name": "flex-basis", "options": [
+        { "option": "30%", "className": "flex-basis(30%)" },
+        { "option": "50%", "className": "flex-basis(50%)" },
+        { "option": "content", "className": "flex-basis-content" }
+      ]}
+    ]
+  },
+  { "title": "alignment", "properties": [
+      { "name": "justify-content", "options": [
+        { "option": "flex-start", "className": "jc_flex-start" },
+        { "option": "flex-end", "className": "jc_flex-end" },
+        { "option": "center", "className": "jc_center" },
+        { "option": "space-between", "className": "jc_space-between" },
+        { "option": "space-around", "className": "jc_space-around" },
+        { "option": "space-evenly", "className": "jc_space-evenly" }
+      ]},
+      { "name": "align-items", "options": [
+        { "option": "flex-start", "className": "ai_flex-start" },
+        { "option": "flex-end", "className": "ai_flex-end" },
+        { "option": "center", "className": "ai_center" },
+        { "option": "baseline", "className": "ai_baseline" },
+        { "option": "stretch", "className": "ai_stretch" }
+      ]},
+      { "name": "align-self", "options": [
+        { "option": "flex-start", "className": "as_flex-start" },
+        { "option": "flex-end", "className": "as_flex-end" },
+        { "option": "center", "className": "as_center" },
+        { "option": "baseline", "className": "as_baseline" },
+        { "option": "stretch", "className": "as_stretch" }
+      ]},
+      { "name": "align-content", "options": [
+        { "option": "flex-start", "className": "ac_flex-start" },
+        { "option": "flex-end", "className": "ac_flex-end" },
+        { "option": "center", "className": "ac_center" },
+        { "option": "space-between", "className": "ac_space-between" },
+        { "option": "space-around", "className": "ac_space-around" },
+        { "option": "space-evenly", "className": "ac_space-evenly" },
+        { "option": "stretch", "className": "ac_stretch" }
+      ]}
     ]
   }
 ]

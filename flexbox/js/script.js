@@ -33,13 +33,14 @@ const renderOption = (object, group) => {
   legend.innerText = object.name;
   fragment.appendChild(legend);
 
-  object.options.forEach(opt => {
+  object.options.forEach(obj => {
     const pre = prefixOption(object.name);
     const radio = document.createElement('div');
     radio.classList.add('radio-controll');
     radio.innerHTML = `
-      <input type="radio" name="${object.name}" id="${pre}_${opt}" data-value="${opt}" data-group="${group}">
-      <label for="${pre}_${opt}">${opt}</label>
+      <input type="radio" name="${object.name}" id="${pre}_${obj.option}"
+        data-value="${obj.option}" data-group="${group}">
+      <label for="${pre}_${obj.option}">${obj.option}</label>
     `;
     fragment.appendChild(radio);
   });
@@ -138,16 +139,13 @@ const prefixOption = name => {
 
 const eventGroup = object => {
   const group = jsonData.find(item => item.title === object.dataset.group);
-  const classList = list.classList;
-  const groupOptionName = ['display', 'flex-direction'];
-  const groupClasses = [
-    { name: 'display', classNames: ['d-flex', 'd-in-flex'] },
-    { name: 'flex-direction', classNames: ['fd-row', 'fd-row-reverse', 'fd-column', 'fd-column-reverse'] },
-  ];
+  const cnList = list.classList;
 
-  const option = group.properties.find(prop => prop.name === object.name);
-  console.log(option);
-  console.log(object.dataset.value);
+  const property = group.properties.find(prop => prop.name === object.name);
+  const option = property.options.find(opt => opt.option === object.dataset.value);
+  console.log('-------------');
+  console.log(`ClassName: ${option.className}`);
+  console.log(`Option: ${object.dataset.value}`);
 };
 
 const init = () => {
