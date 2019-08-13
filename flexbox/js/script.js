@@ -183,10 +183,11 @@ const init = () => {
   const applyItems = document.querySelector('.items-input [type="button"]');
   const clearBtn = document.querySelector('.btn-clear-radio');
 
-  renderListItems.call(null, howManyItems.value);
+  renderListItems(howManyItems.value);
 
   applyItems.addEventListener('click', function() {
-    renderListItems.call(null, howManyItems.value);
+    renderListItems(howManyItems.value);
+    uncheckAllOptions();
   });
 
   flexControlls.addEventListener('change', function(evt) {

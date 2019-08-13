@@ -86,26 +86,26 @@
     "properties": [
       {
         "name": "flex-grow",
-        "options": [{ "option": "0", "className": "flex-grow(0)" }, { "option": "1", "className": "flex-grow(1)" }]
+        "options": [{ "option": "0", "className": "flex-grow_0" }, { "option": "1", "className": "flex-grow_1" }]
       },
       {
         "name": "flex-shrink",
-        "options": [{ "option": "0", "className": "flex-shrink(0)" }, { "option": "1", "className": "flex-shrink(1)" }]
+        "options": [{ "option": "0", "className": "flex-shrink_0" }, { "option": "1", "className": "flex-shrink_1" }]
       },
       {
         "name": "flex-basis",
         "options": [
-          { "option": "30%", "className": "flex-basis(30%)" },
-          { "option": "50%", "className": "flex-basis(50%)" },
-          { "option": "content", "className": "flex-basis-content" }
+          { "option": "30%", "className": "flex-basis_30" },
+          { "option": "50%", "className": "flex-basis_50" },
+          { "option": "content", "className": "flex-basis_content" }
         ]
       },
       {
         "name": "order",
         "options": [
-          { "option": "-1", "className": "order(-1)" },
-          { "option": "0", "className": "order(0)" },
-          { "option": "1", "className": "order(1)" }
+          { "option": "-1", "className": "order_-1" },
+          { "option": "0", "className": "order_0" },
+          { "option": "1", "className": "order_1" }
         ]
       },
       {

@@ -242,3 +242,73 @@ fieldset {
 .ac_stretch {
   align-content: stretch;
 }
+
+/* flex-grow */
+
+.flex-grow_0 {
+  flex-grow: 0;
+}
+
+.flex-grow_1 {
+  flex-grow: 1;
+}
+
+/* flex-shrink */
+
+.flex-shrink_0 {
+  flex-shrink: 0;
+}
+
+.flex-shrink_1 {
+  flex-shrink: 1;
+}
+
+/* flex-basis */
+
+.flex-basis_30 {
+  flex-basis: 30%;
+}
+
+.flex-basis_50 {
+  flex-basis: 50%;
+}
+
+.flex-basis_content {
+  flex-basis: content;
+}
+
+/* order */
+
+.order_-1 {
+  order: -1;
+}
+
+.order_0 {
+  order: 0;
+}
+
+.order_1 {
+  order: 1;
+}
+
+/* align-self */
+
+.as_flex-start {
+  align-self: flex-start;
+}
+
+.as_flex-end {
+  align-self: flex-end;
+}
+
+.as_center {
+  align-self: center;
+}
+
+.as_baseline {
+  align-self: baseline;
+}
+
+.as_stretch {
+  align-self: stretch;
+}
