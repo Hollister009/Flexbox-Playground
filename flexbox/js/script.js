@@ -21,11 +21,12 @@ const renderListItems = num => {
 
 const renderOption = object => {
   const fragment = document.createDocumentFragment();
-  // object.name - STR
+  const fieldSet = document.createElement('fieldset');
   const legend = document.createElement('legend');
+
   legend.innerText = object.name;
   fragment.appendChild(legend);
-  // object.options - ARR of STR
+
   object.options.forEach(opt => {
     const radio = document.createElement('div');
     radio.classList.add('radio-controll');
@@ -35,7 +36,7 @@ const renderOption = object => {
     `;
     fragment.appendChild(radio);
   });
-  const fieldSet = document.createElement('fieldset');
+
   fieldSet.appendChild(fragment);
   return fieldSet;
 };
@@ -44,6 +45,7 @@ const groupFactory = group => {
   let title = '';
   const parent = document.createElement('div');
   parent.classList.add('flex-group');
+  parent.dataset.group = group.title;
 
   switch (group.title) {
     case 'ordering':
@@ -78,6 +80,49 @@ const loadJSON = callback => {
       }),
     )
     .catch(err => console.log(err));
+};
+
+const prefixOption = name => {
+  let prefix;
+  switch (name) {
+    case 'display':
+      prefix = 'ds';
+      break;
+    case 'flex-direction':
+      prefix = 'fd';
+      break;
+    case 'flex-wrap':
+      prefix = 'fw';
+      break;
+    case 'flex-flow':
+      prefix = 'ff';
+      break;
+    case 'order':
+      prefix = 'or';
+      break;
+    case 'justify-content':
+      prefix = 'jc';
+      break;
+    case 'align-items':
+      prefix = 'ai';
+      break;
+    case 'align-self':
+      prefix = 'as';
+      break;
+    case 'align-content':
+      prefix = 'ac';
+      break;
+    case 'flex-grow':
+      prefix = 'fg';
+      break;
+    case 'flex-shrink':
+      prefix = 'fs';
+      break;
+    case 'flex-basis':
+      prefix = 'fb';
+      break;
+  }
+  return prefix;
 };
 
 const init = () => {
