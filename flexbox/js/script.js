@@ -65,7 +65,7 @@ const groupFactory = group => {
   }
 
   if (title.length > 0) {
-    parent.innerHTML = `<h3>${title}</h3>`;
+    parent.innerHTML = `<h3>${title}</h3><hr>`;
   }
 
   group.properties.forEach(option => {
