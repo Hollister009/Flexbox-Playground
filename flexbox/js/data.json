@@ -18,7 +18,6 @@
       {
         "name": "flex-direction",
         "options": [
-          { "option": "remove", "className": "" },
           { "option": "row", "className": "fd_row" },
           { "option": "row-reverse", "className": "fd_row-reverse" },
           { "option": "column", "className": "fd_col" },
@@ -28,7 +27,6 @@
       {
         "name": "flex-wrap",
         "options": [
-          { "option": "remove", "className": "" },
           { "option": "nowrap", "className": "fw_nowrap" },
           { "option": "wrap", "className": "fw_wrap" },
           { "option": "wrap-reverse", "className": "fw_wrap-reverse" }
@@ -37,7 +35,6 @@
       {
         "name": "flex-flow",
         "options": [
-          { "option": "remove", "className": "" },
           { "option": "row nowrap", "className": "ff_row-nowrap" },
           { "option": "column-reverse", "className": "ff_col-reverse" },
           { "option": "column wrap", "className": "ff_col-wrap" },
@@ -52,7 +49,6 @@
       {
         "name": "justify-content",
         "options": [
-          { "option": "remove", "className": "" },
           { "option": "flex-start", "className": "jc_flex-start" },
           { "option": "flex-end", "className": "jc_flex-end" },
           { "option": "center", "className": "jc_center" },
@@ -64,7 +60,6 @@
       {
         "name": "align-items",
         "options": [
-          { "option": "remove", "className": "" },
           { "option": "flex-start", "className": "ai_flex-start" },
           { "option": "flex-end", "className": "ai_flex-end" },
           { "option": "center", "className": "ai_center" },
@@ -75,7 +70,6 @@
       {
         "name": "align-content",
         "options": [
-          { "option": "remove", "className": "" },
           { "option": "flex-start", "className": "ac_flex-start" },
           { "option": "flex-end", "className": "ac_flex-end" },
           { "option": "center", "className": "ac_center" },

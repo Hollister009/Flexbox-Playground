@@ -21,6 +21,49 @@ const renderListItems = num => {
   list.appendChild(fragment);
 };
 
+const prefixOption = name => {
+  let prefix;
+  switch (name) {
+    case 'display':
+      prefix = 'ds';
+      break;
+    case 'flex-direction':
+      prefix = 'fd';
+      break;
+    case 'flex-wrap':
+      prefix = 'fw';
+      break;
+    case 'flex-flow':
+      prefix = 'ff';
+      break;
+    case 'order':
+      prefix = 'or';
+      break;
+    case 'justify-content':
+      prefix = 'jc';
+      break;
+    case 'align-items':
+      prefix = 'ai';
+      break;
+    case 'align-self':
+      prefix = 'as';
+      break;
+    case 'align-content':
+      prefix = 'ac';
+      break;
+    case 'flex-grow':
+      prefix = 'fg';
+      break;
+    case 'flex-shrink':
+      prefix = 'fs';
+      break;
+    case 'flex-basis':
+      prefix = 'fb';
+      break;
+  }
+  return prefix;
+};
+
 /**
  *
  * @param {object} object - optiion object wich must be rendered
@@ -92,51 +135,7 @@ const renderFlexControlls = data => {
   });
 };
 
-const prefixOption = name => {
-  let prefix;
-  switch (name) {
-    case 'display':
-      prefix = 'ds';
-      break;
-    case 'flex-direction':
-      prefix = 'fd';
-      break;
-    case 'flex-wrap':
-      prefix = 'fw';
-      break;
-    case 'flex-flow':
-      prefix = 'ff';
-      break;
-    case 'order':
-      prefix = 'or';
-      break;
-    case 'justify-content':
-      prefix = 'jc';
-      break;
-    case 'align-items':
-      prefix = 'ai';
-      break;
-    case 'align-self':
-      prefix = 'as';
-      break;
-    case 'align-content':
-      prefix = 'ac';
-      break;
-    case 'flex-grow':
-      prefix = 'fg';
-      break;
-    case 'flex-shrink':
-      prefix = 'fs';
-      break;
-    case 'flex-basis':
-      prefix = 'fb';
-      break;
-  }
-  return prefix;
-};
-
-const eventGroup = object => {
-  const cnList = list.classList;
+const updateTargetClassNames = (cnList, object) => {
   // 1. find options object from jsonData
   const group = jsonData.find(item => item.title === object.dataset.group);
   // 2. find target property from group
@@ -146,19 +145,37 @@ const eventGroup = object => {
   // 4. find target option from property array
   const option = property.options.find(opt => opt.option === object.dataset.value);
 
-  groupClassNames.forEach(r => {
-    cnList.contains(r) && cnList.remove(r);
+  groupClassNames.forEach(radio => {
+    cnList.contains(radio) && cnList.remove(radio);
   });
 
   option.className && cnList.add(option.className);
 };
 
+const eventGroup = object => {
+  if (object.dataset.group !== 'flexibility') {
+    updateTargetClassNames(list.classList, object);
+  } else {
+    const flexItem = list.querySelectorAll('li')[1];
+    updateTargetClassNames(flexItem.classList, object);
+  }
+};
+
+const clearFlexItem = (item, base) => {
+  const cnList = [...item.classList].filter(cn => cn !== base);
+
+  item.classList.remove(...cnList);
+};
+
 const uncheckAllOptions = () => {
-  const cnList = [...list.classList].filter(cn => cn !== 'list');
+  const flexItem = list.querySelectorAll('li')[1];
   const allOptions = [...document.querySelectorAll('[type="radio"]')];
 
   allOptions.forEach(radio => (radio.checked = false));
-  list.classList.remove(...cnList);
+  // clear flex container
+  clearFlexItem(list, 'list');
+  // clear single item
+  clearFlexItem(flexItem, 'list-item');
 };
 
 const init = () => {
