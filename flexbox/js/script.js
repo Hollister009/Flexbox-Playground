@@ -77,7 +77,7 @@ const renderOption = (object, group) => {
   const fieldSet = document.createElement('fieldset');
   const legend = document.createElement('legend');
 
-  legend.innerText = object.name;
+  legend.innerText = object.name + ':';
   fragment.appendChild(legend);
 
   object.options.forEach(obj => {
@@ -159,16 +159,15 @@ const eventGroup = object => {
   if (object.dataset.group !== 'flexibility') {
     updateTargetClassNames(list.classList, object);
   } else {
-    const flexItem = list.querySelectorAll('li')[1];
+    const flexItem = list.querySelector('li.selected');
     updateTargetClassNames(flexItem.classList, object);
   }
 };
 
 const uncheckAllOptions = () => {
   const cnList = [...list.classList].filter(cn => cn !== 'list');
-  const allOptions = [...document.querySelectorAll('[type="radio"]')];
-
-  allOptions.forEach(radio => (radio.checked = false));
+  // uncheck all radio inputs
+  [...document.querySelectorAll('[type="radio"]')].forEach(radio => (radio.checked = false));
   // clear flex container
   list.classList.remove(...cnList);
 };
@@ -182,7 +181,8 @@ const init = () => {
 
   applyItems.addEventListener('click', function() {
     renderListItems(howManyItems.value);
-    uncheckAllOptions();
+    // uncheck only for single item properties cause they are rerendered
+    [...document.querySelectorAll('input[data-group*=flexibility]')].forEach(radio => (radio.checked = false));
   });
 
   flexControlls.addEventListener('change', function(evt) {
