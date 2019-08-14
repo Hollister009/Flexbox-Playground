@@ -1,6 +1,7 @@
 const FILE = './js/data.json';
 const list = document.querySelector('.list');
 const flexControlls = document.querySelector('.flex-controlls');
+let flexAllFlag = false;
 let jsonData;
 
 const renderListItems = num => {
@@ -15,6 +16,7 @@ const renderListItems = num => {
     item.classList.add('list-item');
 
     if (i === 2) item.classList.add('selected');
+    if (flexAllFlag) item.classList.add('flex_all');
 
     item.innerHTML = `<h2>${i}</h2>`;
     fragment.appendChild(item);
@@ -113,24 +115,40 @@ const groupFactory = group => {
   group.properties.forEach(option => {
     parent.appendChild(renderOption(option, group.title));
   });
+
   return parent;
 };
 
-const loadJSON = callback => {
-  fetch(FILE)
-    .then(res => res.json())
-    .then(data => {
-      jsonData = data;
-      callback(data);
-    })
-    .catch(err => console.log(err));
-};
+async function loadJSON(callback) {
+  try {
+    const response = await fetch(FILE);
+    jsonData = await response.json();
+    callback(jsonData);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 const renderFlexControlls = data => {
   flexControlls.innerHTML = '';
+
   data.forEach(group => {
     flexControlls.appendChild(groupFactory(group));
   });
+
+  // select element after it renders
+  const flexGroup = flexControlls.querySelector('div[data-group*=flexibility]');
+  const fieldSet = document.createElement('fieldset');
+  const text = 'flex: 1 1 150px';
+
+  fieldSet.innerHTML = `
+    <legend>flex(all items):</legend>
+    <div class="flex-all-items">
+      <input type="checkbox" name="flex" id="flex_all">
+      <label for="flex_all">${text}</label>
+    </div>
+  `;
+  flexGroup.appendChild(fieldSet);
 };
 
 const updateTargetClassNames = (cnList, object) => {
@@ -150,13 +168,20 @@ const updateTargetClassNames = (cnList, object) => {
   option.className && cnList.add(option.className);
 };
 
-const eventGroup = object => {
-  if (object.dataset.group !== 'flexibility') {
-    updateTargetClassNames(list.classList, object);
-  } else {
-    const flexItem = list.querySelector('li.selected');
-    updateTargetClassNames(flexItem.classList, object);
+const inputEventGroup = object => {
+  if (object.type === 'radio') {
+    if (object.dataset.group !== 'flexibility') {
+      updateTargetClassNames(list.classList, object);
+    } else {
+      const flexItem = list.querySelector('li.selected');
+      updateTargetClassNames(flexItem.classList, object);
+    }
+    return;
   }
+
+  flexAllFlag = object.checked;
+  const allItems = [...list.querySelectorAll('.list-item')];
+  allItems.forEach(item => item.classList.toggle('flex_all'));
 };
 
 const uncheckAllOptions = () => {
@@ -172,6 +197,7 @@ const init = () => {
   const applyItems = document.querySelector('.items-input [type="button"]');
   const clearBtn = document.querySelector('.btn-clear-radio');
 
+  // initial render of items
   renderListItems(howManyItems.value);
 
   applyItems.addEventListener('click', function() {
@@ -186,7 +212,8 @@ const init = () => {
   });
 
   flexControlls.addEventListener('change', function(evt) {
-    eventGroup(evt.target);
+    evt.stopPropagation();
+    inputEventGroup(evt.target);
   });
 
   clearBtn.addEventListener('click', function() {
@@ -194,6 +221,7 @@ const init = () => {
     uncheckAllOptions();
   });
 
+  // asynchronous operation
   loadJSON(renderFlexControlls);
 };
 
