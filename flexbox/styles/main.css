@@ -117,11 +117,13 @@ main.content {
   border-radius: 5px;
 }
 
-.radio-controll {
+.radio-controll,
+.flex-all-items {
   padding: 4px 8px;
 }
 
-.radio-controll label {
+.radio-controll label,
+.flex-all-items label {
   cursor: pointer;
 }
 
