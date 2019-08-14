@@ -15,7 +15,7 @@ body {
 main.content {
   display: flex;
   width: 100%;
-  background-color: #fff;
+  background-color: white;
 }
 
 .content > aside {
@@ -30,7 +30,7 @@ main.content {
   padding: 7px;
   position: sticky;
   top: 0;
-  background-color: #fff;
+  background-color: white;
   text-align: center;
   box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.75);
 }
@@ -64,6 +64,15 @@ fieldset {
   height: 100px;
   text-align: center;
   background-color: lightgrey;
+}
+
+.list-item:nth-child(odd) {
+  background-color: crimson;
+  color: white;
+}
+
+.list-item.selected {
+  background-color: yellowgreen;
 }
 
 .list-item > h2 {

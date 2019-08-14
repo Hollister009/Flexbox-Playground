@@ -13,6 +13,9 @@ const renderListItems = num => {
     i += 1;
     const item = document.createElement('li');
     item.classList.add('list-item');
+
+    if (i === 2) item.classList.add('selected');
+
     item.innerHTML = `<h2>${i}</h2>`;
     fragment.appendChild(item);
   } while ((i < num || i < min) && num <= max);
@@ -161,21 +164,13 @@ const eventGroup = object => {
   }
 };
 
-const clearFlexItem = (item, base) => {
-  const cnList = [...item.classList].filter(cn => cn !== base);
-
-  item.classList.remove(...cnList);
-};
-
 const uncheckAllOptions = () => {
-  const flexItem = list.querySelectorAll('li')[1];
+  const cnList = [...list.classList].filter(cn => cn !== 'list');
   const allOptions = [...document.querySelectorAll('[type="radio"]')];
 
   allOptions.forEach(radio => (radio.checked = false));
   // clear flex container
-  clearFlexItem(list, 'list');
-  // clear single item
-  clearFlexItem(flexItem, 'list-item');
+  list.classList.remove(...cnList);
 };
 
 const init = () => {
@@ -194,7 +189,10 @@ const init = () => {
     eventGroup(evt.target);
   });
 
-  clearBtn.addEventListener('click', uncheckAllOptions);
+  clearBtn.addEventListener('click', function() {
+    renderListItems(howManyItems.value);
+    uncheckAllOptions();
+  });
 
   loadJSON(renderFlexControlls);
 };
