@@ -67,11 +67,6 @@ const prefixOption = name => {
   return prefix;
 };
 
-/**
- *
- * @param {object} object - optiion object wich must be rendered
- * @param {string} group - group of option object
- */
 const renderOption = (object, group) => {
   const fragment = document.createDocumentFragment();
   const fieldSet = document.createElement('fieldset');
@@ -180,9 +175,14 @@ const init = () => {
   renderListItems(howManyItems.value);
 
   applyItems.addEventListener('click', function() {
+    let flexItem = document.querySelector('li.selected');
+    const cnList = [...flexItem.classList];
+
     renderListItems(howManyItems.value);
-    // uncheck only for single item properties cause they are rerendered
-    [...document.querySelectorAll('input[data-group*=flexibility]')].forEach(radio => (radio.checked = false));
+
+    // reselect the item cause it was rerendered
+    flexItem = document.querySelector('li.selected');
+    flexItem.classList.add(...cnList);
   });
 
   flexControlls.addEventListener('change', function(evt) {
