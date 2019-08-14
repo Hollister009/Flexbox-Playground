@@ -20,7 +20,7 @@ const renderListItems = num => {
 
     item.innerHTML = `<h2>${i}</h2>`;
     fragment.appendChild(item);
-  } while ((i < num || i < min) && num <= max);
+  } while ((i < num || i < min) && (num <= max || i < min));
 
   list.innerHTML = '';
   list.appendChild(fragment);
