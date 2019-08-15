@@ -34,12 +34,44 @@ Model.fetchData(PATH).then(data => new Model(data));
 class View {
   constructor() {
     this.app = this.getElement('#root');
+    this.main = this.createElement('main', 'container');
+    this.list = this.createElement('ul', 'list');
+    this.itemsCount = this.createElement('section', 'items-count');
+    this.itemsCount.append(this.renderItemsCount());
+    this.app.append(...[this.itemsCount, this.main]);
+
+    this.renderListItems();
   }
 
   getElement(selector) {
     return document.querySelector(selector);
   }
+
+  createElement(tag, className) {
+    const element = document.createElement(tag);
+
+    if (className) element.classList.add(className);
+
+    return element;
+  }
+
+  renderItemsCount() {
+    const label = this.createElement('label');
+    const text = 'How many boxes to display(min 2, max 20):';
+    label.innerHTML = `
+      ${text}
+      <input type="number" name="items" id="items" value="8" min="2" max="20">
+      <input class="btn" type="button" name="items-apply" id="items-apply" value="apply">
+    `;
+    return label;
+  }
+
+  renderListItems() {
+    console.log(this.list);
+  }
 }
+
+console.log(new View());
 
 // /**
 //  * @class Controller
