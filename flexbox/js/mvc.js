@@ -20,12 +20,6 @@ class Model {
   }
 }
 
-//const data = await Model.fetchData(PATH);
-//new Model(data);
-
-// init
-Model.fetchData(PATH).then(data => new Model(data));
-
 /**
  * @class View
  *
@@ -36,7 +30,7 @@ class View {
     this.app = this.getElement('#root');
     this.count = 8;
     // elements of the App
-    this.main = this.createElement('main', 'container');
+    this.main = this.createElement('main', 'content');
     this.list = this.createElement('ul', 'list');
     this.itemsCount = this.createElement('section', 'items-count');
     this.controlsFlex = this.createElement('aside', 'controls-flex');
@@ -57,7 +51,9 @@ class View {
   }
 
   renderAppView() {
-    this.main.append(...[this.list, this.controlsFlex]);
+    const sectionList = this.createElement('section', 'items-list');
+    sectionList.append(this.list);
+    this.main.append(...[sectionList, this.controlsFlex]);
     this.renderItemsCount();
     this.renderListItems(this.count);
     this.app.append(...[this.itemsCount, this.main]);
@@ -96,6 +92,8 @@ class View {
     }
   }
 
+  // methods wich are responsible for flex controls render
+
   prefixOption(option) {
     switch (option) {
       case 'display':
@@ -125,10 +123,26 @@ class View {
     }
   }
 
+  buildFlexItemsCheckbox() {
+    // method search for elemnt which should be added in the DOM
+    const flexGroup = this.getElement('div[data-group*=flexibility]');
+    const fieldSet = this.createElement('fieldset');
+    const text = 'flex: 1 1 150px';
+
+    fieldSet.innerHTML = `
+      <legend>flex(all items):</legend>
+      <div class="flex-all-items">
+        <input type="checkbox" name="flex" id="flex_all">
+        <label for="flex_all">${text}</label>
+      </div>
+    `;
+    flexGroup.appendChild(fieldSet);
+  }
+
   renderSingleOption(object, group) {
     const fragment = document.createDocumentFragment();
-    const fieldSet = document.createElement('fieldset');
-    const legend = document.createElement('legend');
+    const fieldSet = this.createElement('fieldset');
+    const legend = this.createElement('legend');
 
     legend.innerText = object.name + ':';
     fragment.appendChild(legend);
@@ -174,36 +188,43 @@ class View {
   }
 
   renderControlGroups(data) {
-    console.log(this.controlsFlex);
     this.controlsFlex.innerHTML = '';
 
     data.forEach(group => {
       this.controlsFlex.appendChild(this.renderGroupOptions(group));
     });
+
+    this.buildFlexItemsCheckbox();
+    console.log(this.controlsFlex);
   }
 }
 
-new View();
+// new View();
 
-// /**
-//  * @class Controller
-//  *
-//  * Links the user input and the view output.
-//  *
-//  * @param model
-//  * @param view
-//  */
-// class Controller {
-//   constructor(model, view) {
-//     this.model = model;
-//     this.view = view;
-//   }
-// }
+/**
+ * @class Controller
+ *
+ * Links the user input and the view output.
+ *
+ * @param model
+ * @param view
+ */
+class Controller {
+  constructor(model, view) {
+    this.model = model;
+    this.view = view;
 
-// const app = {
-//   init() {
-//     new Controller(new Model(), new View());
-//   },
-// };
+    this.onDataLoad(this.model.data);
+  }
 
-// app.init();
+  onDataLoad = data => {
+    this.view.renderControlGroups(data);
+  };
+
+  static async init() {
+    const data = await Model.fetchData(PATH);
+    return new Controller(new Model(data), new View());
+  }
+}
+
+Controller.init();
